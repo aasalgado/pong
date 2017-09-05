@@ -29,6 +29,18 @@ var leftSpeedOfBall = 0;
 var score1;
 var score2;
 
+function startBall() {
+topPositionOfBall = 510;
+leftPositionOfBall = 820;
+if (Math.random() < 0.5) {
+  var side = 1
+ } else {
+  var side = -1
+ }
+ topSpeedOfBall = Math.random() * -6 - 3;
+ leftSpeedOfBall = side * (Math.random() * 6 + 3);
+};
+
 document.addEventListener('keydown', function (e) {
     if (e.keyCode === 87 || e.which === 87) { // W key
     speedOfPaddle1 = -10;
@@ -71,13 +83,13 @@ window.setInterval(function show() {
     if (positionOfPaddle2 <= 150) {
         positionOfPaddle2 = 150;
     }
-    if (positionOfPaddle1 >= window.innerHeight - positionOfPaddle1) {
-        positionOfPaddle1 = window.innerHeight - positionOfPaddle1
+    if (positionOfPaddle1 >= window.innerHeight - paddleHeight) { // set paddle1 position
+        positionOfPaddle1 = window.innerHeight - paddleHeight
     }
-    if (positionOfPaddle2 >= window.innerHeight - positionOfPaddle2) {
-        positionOfPaddle2 = window.innerHeight - positionOfPaddle2
+    if (positionOfPaddle2 >= window.innerHeight - paddleHeight) { // set paddle2 position
+        positionOfPaddle2 = window.innerHeight - paddleHeight
     }
-    if (topPositionOfBall <= 150 || topPositionOfBall >= window.innerHeight - ballRadius) { // reverse the ball when it hits the top or bottom
+    if (topPositionOfBall <= 150 || topPositionOfBall >= window.innerHeight - ballRadius) { // reverse the ball when it hits the top or bottom** - ballRadius
         topSpeedOfBall = -topSpeedOfBall
     }
     if (leftPositionOfBall <= paddleWidth) { // reverse direction of ball when it hits paddle1, else new game
@@ -111,17 +123,7 @@ document.addEventListener('keyup', function (e) {
     }
 }, false)
 
-function startBall() {
-topPositionOfBall = 510;
-leftPositionOfBall = 820;
-if (Math.random() < 0.5) {
-  var side = 1
- } else {
-  var side = -1
- }
- topSpeedOfBall = Math.random() * -2 - 3;
- leftSpeedOfBall = side * (Math.random() * 2 + 3);
-};
+
 </script>
 </body>
 </html>
