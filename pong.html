@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pong</title>
+</head>
+<body>
+
+<div id="paddle1" style = "position:absolute; left:0px; top:460px; width:10px; height:150px; background-color:black;"></div>
+<div id="ball" style= "position:absolute;left:700px;top:510px;width:25px;height:25px;background-color:red;border-radius:50%;"></div>
+<div id="paddle2" style= "position:absolute;right:0px;top:460px;width:10px;height:150px;background-color:black;"></div>
+    
+<script>
+
+var paddleHeight = 150;
+var ballRadius = 25;
+var halfPaddleHeight = paddleHeight / 2;
+var speedOfPaddle1 = 0;
+var positionOfPaddle1 = 460;
+var speedOfPaddle2 = 0;
+var positionOfPaddle2 = 460;
+var topPositionOfBall = 510;
+var leftPositionOfBall = 820;
+var topSpeedOfBall = 0;
+var leftSpeedOfBall = 0;
+var score1;
+var score2;
+
+document.addEventListener('keydown', function (e) {
+    if (e.keyCode === 87 || e.which === 87) { // W key
+    speedOfPaddle1 = -10;
+    //document.getElementById('paddle1').style.top = (positionOfPaddle1) + "px"
+    }
+
+    if (e.keycode === 83 || e.which === 83) { // S Key
+    speedOfPaddle1 = 10;
+    //document.getElementById('paddle1').style.top = (positionOfPaddle1) + "px"
+    }
+
+    if (e.keycode === 38 || e.which === 38) { // UP Arrow Key
+    speedOfPaddle2 = -10;
+    //document.getElementById('paddle2').style.top = (positionOfPaddle2) + "px"
+    }
+
+    if (e.keycode === 40 || e.which === 40) { // DOWN Arrow Key
+    speedOfPaddle2 = 10;
+    //document.getElementById('paddle2').style.top = (positionOfPaddle2) + "px"
+    }
+}, false)
+
+//create smooth paddle movement
+window.setInterval(function show() {
+    positionOfPaddle1 += speedOfPaddle1;
+    positionOfPaddle2 += speedOfPaddle2;
+
+    document.getElementById('paddle1').style.top = (positionOfPaddle1) + "px"
+    document.getElementById('paddle2').style.top = (positionOfPaddle2) + "px"
+
+    if (positionOfPaddle1 <= 150) {
+        positionOfPaddle1 = 150;
+    }
+    if (positionOfPaddle2 <= 150) {
+        positionOfPaddle2 = 150;
+    }
+    if (positionOfPaddle1 >= window.innerHeight - positionOfPaddle1) {
+        positionOfPaddle1 = window.innerHeight - positionOfPaddle1
+    }
+    if (positionOfPaddle2 >= window.innerHeight - positionOfPaddle2) {
+        positionOfPaddle2 = window.innerHeight - positionOfPaddle2
+    }
+}, 1000/60);
+
+document.addEventListener('keyup', function (e) {
+    if (e.keyCode === 87 || e.which === 87) {
+        speedOfPaddle1 = 0;
+    }
+    if (e.keyCode === 83 || e.which === 83) {
+        speedOfPaddle1 = 0;
+    }
+    if (e.keyCode === 38 || e.which === 38) {
+        speedOfPaddle2 = 0;
+    }
+    if (e.keycode === 40 || e.which === 40) {
+        speedOfPaddle2 = 0;
+    }
+}, false)
+
+</script>
+</body>
+</html>
