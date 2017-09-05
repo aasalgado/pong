@@ -15,6 +15,7 @@
 <script>
 
 var paddleHeight = 150;
+var paddleWidth = 10;
 var ballRadius = 25;
 var halfPaddleHeight = paddleHeight / 2;
 var speedOfPaddle1 = 0;
@@ -76,6 +77,23 @@ window.setInterval(function show() {
     if (positionOfPaddle2 >= window.innerHeight - positionOfPaddle2) {
         positionOfPaddle2 = window.innerHeight - positionOfPaddle2
     }
+    if (topPositionOfBall <= 150 || topPositionOfBall >= window.innerHeight - ballRadius) { // reverse the ball when it hits the top or bottom
+        topSpeedOfBall = -topSpeedOfBall
+    }
+    if (leftPositionOfBall <= paddleWidth) { // reverse direction of ball when it hits paddle1, else new game
+        if (topPositionOfBall > positionOfPaddle1 && topPositionOfBall < positionOfPaddle1 + paddleHeight) {
+            leftSpeedOfBall = -leftSpeedOfBall;
+        } else {
+            startBall();
+            }
+    }
+    if (leftPositionOfBall >= window.innerWidth - ballRadius - paddleWidth) { // reverse direction of ball when it hits paddle2, else new game
+        if (topPositionOfBall > positionOfPaddle2 && topPositionOfBall < positionOfPaddle2 + paddleHeight) {
+            leftSpeedOfBall = -leftSpeedOfBall
+        } else {
+            startBall();
+            }
+    }   
 }, 1000/60);
 
 document.addEventListener('keyup', function (e) {
