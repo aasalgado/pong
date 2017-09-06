@@ -1,0 +1,24 @@
+#intro {
+    z-index: 1; 
+    position: absolute; 
+    top: 100px; 
+    left: 425px; 
+    width: 600px; 
+    height: 400px; 
+    background-color: rgba(47,45,45,1);
+    border:1px solid white;
+}
+#pong {
+text-align:center;
+vertical-align: middle;
+color: white;
+font-family: 'Press Start 2P', cursive;
+font-size: 100px;
+line-height: 250%;
+}
+p {
+    text-align:center;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+}
