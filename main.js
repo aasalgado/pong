@@ -22,8 +22,22 @@ var score2 = 0;
 var round = 1;
 var down = false;
 var downIntro = false;
+var topPauseSpeed = 0;
+var leftPauseSpeed = 0;
 
-blinkFast('#ball');
+document.addEventListener('keydown',function (e) {
+    if ((e.keyCode === 27 || e.which === 27) && topSpeedOfBall !== 0) {
+         topPauseSpeed = topSpeedOfBall;
+         leftPauseSpeed = leftSpeedOfBall;
+         topSpeedOfBall = 0;
+         leftSpeedOfBall = 0;
+    } else if ((topSpeedOfBall === 0 && leftSpeedOfBall === 0) && (e.keyCode === 27 || e.which === 27)){
+        topSpeedOfBall = topPauseSpeed;
+        leftSpeedOfBall = leftPauseSpeed;
+    }
+}, false)
+
+//blinkFast('#ball');
 
 // Function sets the ball after each round/new game
 function setBall() {
