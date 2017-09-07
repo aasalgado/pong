@@ -21,6 +21,7 @@ var score1 = 0;
 var score2 = 0;
 var round = 1;
 var down = false;
+var downIntro = false;
 
 blinkFast('#ball');
 
@@ -30,6 +31,7 @@ function setBall() {
     leftPositionOfBall = 700;
     topSpeedOfBall = 0;
     leftSpeedOfBall = 0;
+    down = false;
 }
 
 // Hide the divs that pop up
@@ -42,7 +44,9 @@ function enter (enter) {
     document.addEventListener('keydown', function (e) {
         if (e.keyCode === 13 || e.which === 13) {
         enter.hide();
+        if(down === false) {
         startBall();
+        down = true;}
         }
         })
 }
@@ -95,11 +99,12 @@ function intro() {
     document.addEventListener('keydown', function (e) {
     if (e.keyCode === 13 || e.which === 13) { // Enter key
         $('#intro').fadeOut('slow');
-        if(down === false){
+        if(downIntro === false){
             atari.play();
-            down = true;
+            startBall();
+            downIntro = true;
         }
-        startBall();
+        
     }
     })
  }
