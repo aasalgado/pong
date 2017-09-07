@@ -22,6 +22,8 @@ var score2 = 0;
 var round = 1;
 var down = false;
 
+blinkFast('#ball');
+
 // Function sets the ball after each round/new game
 function setBall() {
     topPositionOfBall = 510;
@@ -54,16 +56,11 @@ function getWinner () {
     }
 }
 
-// point function figures out who won in previous round
-function point () {
-    if (point1 === true) {
-        return1
-    } 
-}
 // reset function resets scores and values before new game starts
 function reset () {
     score1 = 0;
     score2 = 0;
+    round = 1;
     document.getElementById('titleRnd').innerHTML = 1;
     document.getElementById('rnd').innerHTML = 0;
     document.getElementById('score1').innerHTML = 0;
@@ -220,3 +217,12 @@ $(selector).fadeOut('slow', function(){
     });
 });
 }
+
+// blink content fast
+function blinkFast(selector){
+    $(selector).fadeOut('fast', function(){
+        $(this).fadeIn('fast', function(){
+            blink(this);
+        });
+    });
+    }
