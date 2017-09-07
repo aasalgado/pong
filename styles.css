@@ -1,7 +1,6 @@
 #intro {
     z-index: 1; 
     position: absolute; 
-    height: 400px; 
     background-color: rgba(47,45,45,1);
     border:1px solid white;
     height: 100%;
@@ -21,5 +20,56 @@ p {
     text-align:center;
     color: white;
     font-family: 'Press Start 2P', cursive;
-    font-size: 50px;
+}
+#round {
+    z-index: 1;
+    position: absolute; 
+    background-color: rgba(47,45,45,1);
+    border:1px solid white;
+    height: 50%;
+    width: 50%;
+    top: 25%;
+    left: 25%;
+}
+h1, h2, h3 {
+    font-family: 'Press Start 2P', cursive;
+    color: rgba(47,45,45,1);
+}
+#nextRnd {
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    position: absolute;
+    vertical-align: middle;
+    top: 25%;
+    left: 32%;
+    text-align: center;
+    font-size: 35px;
+}
+#point {
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    position: absolute;
+    vertical-align: middle;
+    top: 40%;
+    left: 5%;
+    text-align: center;
+    font-size: 30px;
+}
+#end {
+    z-index: 1; 
+    position: absolute; 
+    background-color: rgba(47,45,45,1);
+    border:1px solid white;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+#endPlayer {
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    position: absolute;
+    top: 35%;
+    left: 15%;
+    font-size: 80px;
 }

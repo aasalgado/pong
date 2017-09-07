@@ -10,14 +10,27 @@
     <script src="jquery-3.2.1.js"></script>
 </head>
 <body onload="intro()">
+
 <div id="intro">
     <div id="pong">Pong</div>
-    <p>Press Enter to Play</p>
+    <p style="font-size: 50px;">Press Enter to Play</p>
 </div>
 
-<h1 style="position:absolute;left:45%;top:10px;font-size:70px;">Pong</h1>
-<h1 style="position:absolute;left:30px;top:80px;">Player 1: <span id="score1">0</span></h1>
-<h1 style="position:absolute;right:30px;top:80px;">Player 2: <span id="score2">0</span></h1>
+<div id="round">
+<div id="nextRnd">Round <span id="rnd">0</span>!</div>
+<div id="point">Player <span id="player">0</span> wins a point!</div>
+<p style="position:absolute;top:75%;left:22%;">Press Enter for next round</p>
+</div>
+
+<div id="end">
+    <div id="endPlayer">Player <span id="winner"></span> Wins!</div>
+        <p>Press Enter to Play again</p>
+</div>
+
+<h1 style="position:absolute;left:40%;top:10px;font-size:80px;">Pong</h1>
+<h3 style="position:absolute;left:47%;top:5px;">Round <span id="titleRnd">1</span></h2>
+<h2 style="position:absolute;left:30px;top:80px;">Player 1: <span id="score1">0</span></h2>
+<h2 style="position:absolute;right:30px;top:80px;">Player 2: <span id="score2">0</span></h2>
 <hr style="margin-top:150px;">
 
 <div id="paddle1" style = "position:absolute; left:0px; top:460px; width:10px; height:150px; background-color:black;"></div>
@@ -44,25 +57,81 @@ var topSpeedOfBall = 0;
 var leftSpeedOfBall = 0;
 var score1 = 0;
 var score2 = 0;
-var count = score1 + score2;
+var nextRnd = 0;
+var down = false;
+
+function setBall() {
+    topPositionOfBall = 510;
+    leftPositionOfBall = 820;
+    topSpeedOfBall = 0;
+    leftSpeedOfBall = 0;
+}
 
 $('#intro').hide();
+$('#round').hide();
+$('#end').hide();
 
-function blink(selector){
-$(selector).fadeOut('slow', function(){
-    $(this).fadeIn('slow', function(){
-        blink(this);
-    });
-});
+function enter (enter) {
+    document.addEventListener('keydown', function (e) {
+        if (e.keyCode === 13 || e.which === 13) {
+        enter.hide();
+        startBall();
+        }
+        })
 }
+function playerPoint () {
+    if (score2 > score1) {
+        return 2;
+    } else {
+        return 1;
+    }
+}
+function reset () {
+    score1 = 0;
+    score2 = 0;
+    document.getElementById('titleRnd').innerHTML = 1;
+    document.getElementById('rnd').innerHTML = 0;
+    document.getElementById('score1').innerHTML = 0;
+    document.getElementById('score2').innerHTML = 0;
+    setBall();
+}
+function checkRound() {
+    nextRnd = score1 + score2 + 1;
+    $round = $('#round')
+    if(nextRnd === 2){
+        document.getElementById('rnd').innerHTML = nextRnd;
+        document.getElementById('titleRnd').innerHTML = nextRnd;
+        document.getElementById('player').innerHTML = playerPoint();
+        $round.show();
+        setBall();
+        enter($round);
+    } else if (nextRnd === 3) {
+            document.getElementById('rnd').innerHTML = nextRnd;
+            document.getElementById('titleRnd').innerHTML = nextRnd;
+            document.getElementById('player').innerHTML = playerPoint();
+            $round.show();
+            setBall();
+            enter($round);
+    } else {
+            var $end = $('#end')
+            document.getElementById('winner').innerHTML = playerPoint()
+            $end.show();
+            reset();
+            enter($end);
+    }
+    }
+
 
 function intro() {
     $('#intro').fadeIn();
     blink('p');
     document.addEventListener('keydown', function (e) {
     if (e.keyCode === 13 || e.which === 13) { // Enter key
-        $('#intro').fadeOut();
-        atari.play();
+        $('#intro').fadeOut('slow');
+        if(down === false){
+            atari.play();
+            down = true;
+        }
         startBall();
     }
     })
@@ -76,8 +145,8 @@ if (Math.random() < 0.5) {
  } else {
   var side = -1
  }
- topSpeedOfBall = Math.random() * -6 - 3;
- leftSpeedOfBall = side * (Math.random() * 6 + 3);
+ topSpeedOfBall = Math.random() * -6 - 8;
+ leftSpeedOfBall = side * (Math.random() * 6 + 8);
 };
 
 document.addEventListener('keydown', function (e) {
@@ -139,7 +208,8 @@ window.setInterval(function show() {
         } else {
             score2++;
             missS.play();
-            startBall();
+            setBall();
+            checkRound();
             }
     }
     if (leftPositionOfBall >= window.innerWidth - ballRadius - paddleWidth) { // reverse direction of ball when it hits paddle2, else new game
@@ -149,11 +219,12 @@ window.setInterval(function show() {
         } else {
             score1++;
             missS.play();
-            startBall();
+            setBall();
+            checkRound();
             }
     }   
 
-    document.getElementById('score1').innerText = score1.toString();
+    document.getElementById('score1').innerHTML = score1.toString();
     document.getElementById('score2').innerHTML = score2.toString();
 }, 1000/60);
 
@@ -172,7 +243,13 @@ document.addEventListener('keyup', function (e) {
     }
 }, false)
 
-
+function blink(selector){
+$(selector).fadeOut('slow', function(){
+    $(this).fadeIn('slow', function(){
+        blink(this);
+    });
+});
+}
 
 </script>
 </body>
