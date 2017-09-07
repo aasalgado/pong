@@ -16,6 +16,14 @@ font-family: 'Press Start 2P', cursive;
 font-size: 200px;
 line-height: 250%;
 }
+#buttons {
+    text-align:center;
+    vertical-align: middle;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 15px;
+    
+}
 p {
     text-align:center;
     color: white;
@@ -72,4 +80,16 @@ h1, h2, h3 {
     top: 35%;
     left: 15%;
     font-size: 80px;
+}
+body {
+    /* z-index: 2; */
+    background-image: url("background.png");
+    background-position: 60% 0%;
+}
+#header {
+    /* z-index: 3; */
+    background: white;
+    height: 150px;
+    position: relative;
+    top: -150px;
 }
