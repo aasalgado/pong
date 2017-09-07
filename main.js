@@ -19,7 +19,7 @@ var topSpeedOfBall = 0;
 var leftSpeedOfBall = 0;
 var score1 = 0;
 var score2 = 0;
-var nextRnd = 0;
+var round = 1;
 var down = false;
 
 // Function sets the ball after each round/new game
@@ -44,13 +44,21 @@ function enter (enter) {
         }
         })
 }
+
 // playPoint function figures out which player
-function playerPoint () {
+function getWinner () {
     if (score2 > score1) {
         return 2;
     } else {
-        return 1;f
+        return 1;
     }
+}
+
+// point function figures out who won in previous round
+function point () {
+    if (point1 === true) {
+        return1
+    } 
 }
 // reset function resets scores and values before new game starts
 function reset () {
@@ -63,32 +71,25 @@ function reset () {
     setBall();
 }
 
-// checkRound function updates the divs that pop up
-function checkRound() {
-    nextRnd = score1 + score2 + 1;
+// playerPoint function updates the divs that pop up
+function playerPoint(player) {
     $round = $('#round')
-    if(nextRnd === 2){
-        document.getElementById('rnd').innerHTML = nextRnd;
-        document.getElementById('titleRnd').innerHTML = nextRnd;
-        document.getElementById('player').innerHTML = playerPoint();
+    if(round < 3){
+        round ++;
+        document.getElementById('rnd').innerHTML = round;
+        document.getElementById('titleRnd').innerHTML = round;
+        document.getElementById('player').innerHTML = player;
         $round.show();
         setBall();
         enter($round);
-    } else if (nextRnd === 3) {
-            document.getElementById('rnd').innerHTML = nextRnd;
-            document.getElementById('titleRnd').innerHTML = nextRnd;
-            document.getElementById('player').innerHTML = playerPoint();
-            $round.show();
-            setBall();
-            enter($round);
     } else {
-            var $end = $('#end')
-            document.getElementById('winner').innerHTML = playerPoint()
-            $end.show();
-            reset();
-            enter($end);
+        var $end = $('#end')
+        document.getElementById('winner').innerHTML = getWinner()
+        $end.show();
+        reset();
+        enter($end);
     }
-    }
+}
 
 
 function intro() {
@@ -105,7 +106,7 @@ function intro() {
     }
     })
  }
- 
+
 // sets the intial position of the ball and moves it
 function startBall() {
 topPositionOfBall = 510;
@@ -176,7 +177,7 @@ window.setInterval(function show() {
             score2++;
             missS.play();
             setBall();
-            checkRound();
+            playerPoint(2);
             }
     }
     if (leftPositionOfBall >= window.innerWidth - ballRadius - paddleWidth) { // reverse direction of ball when it hits paddle2, else new game
@@ -187,7 +188,7 @@ window.setInterval(function show() {
             score1++;
             missS.play();
             setBall();
-            checkRound();
+            playerPoint(1);
             }
     }   
 
