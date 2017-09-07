@@ -1,8 +1,10 @@
+// Sound Effects
 var wallS = new Audio("ping_pong_8bit_plop.wav")
 var paddleS = new Audio("ping_pong_8bit_beeep.wav")
 var missS = new Audio("ping_pong_8bit_peeeeeep.wav")
 var atari = new Audio("Atari-Sound.wav")
 
+// Variables
 var paddleHeight = 150;
 var paddleWidth = 10;
 var ballRadius = 25;
@@ -20,6 +22,7 @@ var score2 = 0;
 var nextRnd = 0;
 var down = false;
 
+// Function sets the ball after each round/new game
 function setBall() {
     topPositionOfBall = 510;
     leftPositionOfBall = 700;
@@ -27,10 +30,12 @@ function setBall() {
     leftSpeedOfBall = 0;
 }
 
+// Hide the divs that pop up
 $('#intro').hide();
 $('#round').hide();
 $('#end').hide();
 
+// Function closes the pop up windows and starts new round/game when press enter
 function enter (enter) {
     document.addEventListener('keydown', function (e) {
         if (e.keyCode === 13 || e.which === 13) {
@@ -39,13 +44,15 @@ function enter (enter) {
         }
         })
 }
+// playPoint function figures out which player
 function playerPoint () {
     if (score2 > score1) {
         return 2;
     } else {
-        return 1;
+        return 1;f
     }
 }
+// reset function resets scores and values before new game starts
 function reset () {
     score1 = 0;
     score2 = 0;
@@ -55,6 +62,8 @@ function reset () {
     document.getElementById('score2').innerHTML = 0;
     setBall();
 }
+
+// checkRound function updates the divs that pop up
 function checkRound() {
     nextRnd = score1 + score2 + 1;
     $round = $('#round')
@@ -96,7 +105,8 @@ function intro() {
     }
     })
  }
-
+ 
+// sets the intial position of the ball and moves it
 function startBall() {
 topPositionOfBall = 510;
 leftPositionOfBall = 700;
@@ -109,25 +119,22 @@ if (Math.random() < 0.5) {
  leftSpeedOfBall = side * (Math.random() * 6 + 8);
 };
 
+// setting up the buttons when pressed down
 document.addEventListener('keydown', function (e) {
     if (e.keyCode === 87 || e.which === 87) { // W key
     speedOfPaddle1 = -10;
-    //document.getElementById('paddle1').style.top = (positionOfPaddle1) + "px"
     }
 
     if (e.keycode === 83 || e.which === 83) { // S Key
     speedOfPaddle1 = 10;
-    //document.getElementById('paddle1').style.top = (positionOfPaddle1) + "px"
     }
 
     if (e.keycode === 38 || e.which === 38) { // UP Arrow Key
     speedOfPaddle2 = -10;
-    //document.getElementById('paddle2').style.top = (positionOfPaddle2) + "px"
     }
 
     if (e.keycode === 40 || e.which === 40) { // DOWN Arrow Key
     speedOfPaddle2 = 10;
-    //document.getElementById('paddle2').style.top = (positionOfPaddle2) + "px"
     }
 }, false)
 
@@ -145,19 +152,19 @@ window.setInterval(function show() {
     document.getElementById("ball").style.top = (topPositionOfBall) + "px";
     document.getElementById("ball").style.left = (leftPositionOfBall) + "px";
 
-    if (positionOfPaddle1 <= 150) {
+    if (positionOfPaddle1 <= 150) { // set paddle1 position at the top
         positionOfPaddle1 = 150;
     }
-    if (positionOfPaddle2 <= 150) {
+    if (positionOfPaddle2 <= 150) { // set paddle2 position at the top
         positionOfPaddle2 = 150;
     }
-    if (positionOfPaddle1 >= window.innerHeight - paddleHeight) { // set paddle1 position
+    if (positionOfPaddle1 >= window.innerHeight - paddleHeight) { // set paddle1 position at the bottom
         positionOfPaddle1 = window.innerHeight - paddleHeight
     }
-    if (positionOfPaddle2 >= window.innerHeight - paddleHeight) { // set paddle2 position
+    if (positionOfPaddle2 >= window.innerHeight - paddleHeight) { // set paddle2 position at the bottom
         positionOfPaddle2 = window.innerHeight - paddleHeight
     }
-    if (topPositionOfBall <= 150 || topPositionOfBall >= window.innerHeight - ballRadius) { // reverse the ball when it hits the top or bottom** - ballRadius
+    if (topPositionOfBall <= 150 || topPositionOfBall >= window.innerHeight - ballRadius) { // reverse the ball when it hits the top or bottom
         topSpeedOfBall = -topSpeedOfBall;
         wallS.play();
     }
@@ -188,6 +195,7 @@ window.setInterval(function show() {
     document.getElementById('score2').innerHTML = score2.toString();
 }, 1000/60);
 
+// Stops the paddles when keyed up
 document.addEventListener('keyup', function (e) {
     if (e.keyCode === 87 || e.which === 87) {
         speedOfPaddle1 = 0;
@@ -203,6 +211,7 @@ document.addEventListener('keyup', function (e) {
     }
 }, false)
 
+// blinks content
 function blink(selector){
 $(selector).fadeOut('slow', function(){
     $(this).fadeIn('slow', function(){
