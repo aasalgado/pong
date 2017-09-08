@@ -83,7 +83,7 @@ h1, h2, h3 {
 }
 body {
     /* z-index: 2; */
-    background-image: url("background.png");
+    background-image: url('../images/background.png');
     background-position: 60% 0%;
 }
 #header {
