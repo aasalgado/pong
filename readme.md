@@ -51,7 +51,7 @@ As a player, I can input my name to the game to see my name on the scoreboard.
 
 As a player, I am able to choose how many rounds I want to play.
 
-As a player, I want to hear a looping background music running alongside the game.
+As a player, I can have the option to play a 1-player game or a 2-player game.
 
 Acknowledgments
 --
