@@ -17,6 +17,8 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 
 Player 1 can navigate the paddle up & down using the W & S keys. On the other hand, player 2 can do the same using the UP & DOWN arrow keys.
 
+[Click to Play!](https://aasalgado.github.io/pong/)
+
 Development & Technologies
 --
 Pong was built using HTML, CSS, JavaScript, and the jQuery library
