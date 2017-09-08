@@ -54,7 +54,6 @@ document.addEventListener('keydown',function (e) {
     }
 }, false)
 
-
 // Function sets the ball after each round/new game
 function setBall() {
     ball.topPos = 510;
@@ -82,7 +81,7 @@ function enter (popup) {
     })
 }
 
-// playPoint function figures out which player
+// playPoint function figures out which player won
 function getWinner () {
     if (score2 > score1) {
         return 2;
@@ -123,7 +122,7 @@ function playerPoint(player) {
     }
 }
 
-
+// intro div, runs when the uploads
 function intro() {
     $('#intro').fadeIn();
     blink('p');
@@ -173,7 +172,7 @@ document.addEventListener('keydown', function (e) {
 }, false)
 
 //create smooth paddle movement
-window.setInterval(function show() {
+window.setInterval(function () {
     paddle1.pos += paddle1.speed;
     paddle2.pos += paddle2.speed;
 
@@ -187,15 +186,11 @@ window.setInterval(function show() {
     document.getElementById("ball").style.left = (ball.leftPos) + "px";
 
     paddle1.constraint(150, window.innerHeight - paddle1.height)
-    // if (paddle1.pos <= 150) { // set paddle1 position at the top
-    //     paddle1.pos = 150;
-    // }
+    
     if (paddle2.pos <= 150) { // set paddle2 position at the top
         paddle2.pos = 150;
     }
-    // if (paddle1.pos >= window.innerHeight - paddle1.height) { // set paddle1 position at the bottom
-    //     paddle1.pos = window.innerHeight - paddle1.height
-    // }
+    
     if (paddle2.pos >= window.innerHeight - paddle1.height) { // set paddle2 position at the bottom
         paddle2.pos = window.innerHeight - paddle1.height
     }
