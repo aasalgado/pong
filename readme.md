@@ -35,7 +35,7 @@ As a player, I can see my score through the scoreboard.
 
 As a player, I am prompted who wins a round.
 
-As a plaer, I am prompted who wins the game.
+As a player, I am prompted who wins the game.
 
 As a player, I can hear audio effects whenever the ball comes in contact with the walls and paddles.
 
